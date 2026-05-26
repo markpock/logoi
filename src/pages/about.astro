@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteTitle } from "../site.config.mjs";
+---
+
+<BaseLayout title={siteTitle("About")}>
+  <article class="about-page">
+    <h1>About</h1>
+    <p>
+      Notes on logic, computation, language, and philosophy -- and anything else
+      that comes to mind. One particular area of interest is inferentialist
+      semantics, both on the side of philosophy of language and formal semantics
+      of programming languages -- though this will not stop me from posting about
+      my initial forays into denotational approaches in PL. 
+    </p>
+  </article>
+</BaseLayout>

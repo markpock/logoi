@@ -1,0 +1,295 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import "katex/dist/katex.min.css";
+import {
+  ASSETS,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  withBase,
+} from "../site.config.mjs";
+import "../styles/global.css";
+
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  bodyClass = "",
+} = Astro.props;
+const fontStyles = `
+  @font-face {
+    font-family: "New Computer Modern";
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url("${ASSETS.fonts.regular}") format("opentype");
+  }
+
+  @font-face {
+    font-family: "New Computer Modern";
+    font-style: italic;
+    font-weight: 400;
+    font-display: block;
+    src: url("${ASSETS.fonts.italic}") format("opentype");
+  }
+
+  @font-face {
+    font-family: "New Computer Modern";
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+    src: url("${ASSETS.fonts.bold}") format("opentype");
+  }
+
+  @font-face {
+    font-family: "New Computer Modern";
+    font-style: italic;
+    font-weight: 700;
+    font-display: block;
+    src: url("${ASSETS.fonts.boldItalic}") format("opentype");
+  }
+
+  :root {
+    --tag-icon-mask: url("${ASSETS.tagIcon}") center / contain no-repeat;
+  }
+`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="preload" href={ASSETS.fonts.regular} as="font" type="font/otf" crossorigin />
+    <link rel="preload" href={ASSETS.fonts.italic} as="font" type="font/otf" crossorigin />
+    <link rel="preload" href={ASSETS.fonts.bold} as="font" type="font/otf" crossorigin />
+    <title>{title}</title>
+    <style is:inline set:html={fontStyles}></style>
+    <style is:inline>
+      html,
+      body {
+        background: #f8f7f4;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background: #151615;
+        }
+      }
+    </style>
+    <script is:inline>
+      const getTheme = () => {
+        const storedTheme = localStorage.getItem("theme");
+        const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        return storedTheme || (systemDark ? "dark" : "light");
+      };
+
+      document.documentElement.dataset.theme = getTheme();
+
+      document.addEventListener("astro:before-swap", (event) => {
+        event.newDocument.documentElement.dataset.theme = getTheme();
+      });
+    </script>
+    <ViewTransitions />
+  </head>
+  <body class={bodyClass}>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href={withBase("/")}>{SITE_TITLE}</a>
+        <p>{SITE_DESCRIPTION}</p>
+        <nav aria-label="Primary navigation">
+          <a href={withBase("/")}>notes</a>
+          <a href={withBase("/about/")}>about</a>
+          <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+            <span aria-hidden="true"></span>
+          </button>
+        </nav>
+      </header>
+      <main transition:animate="fade">
+        <slot />
+      </main>
+    </div>
+    <script is:inline>
+      const setTheme = (theme) => {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem("theme", theme);
+        document
+          .querySelector(".theme-toggle")
+          ?.setAttribute("aria-pressed", String(theme === "dark"));
+      };
+
+      const syncThemeToggle = () => {
+        const button = document.querySelector(".theme-toggle");
+        button?.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
+      };
+
+      if (!window.__themeToggleBound) {
+        window.__themeToggleBound = true;
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest?.(".theme-toggle");
+          if (!button) return;
+          event.preventDefault();
+          const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+          setTheme(nextTheme);
+        });
+      }
+
+      document.addEventListener("astro:page-load", syncThemeToggle);
+      syncThemeToggle();
+
+      const initNotesFilter = () => {
+        const form = document.querySelector(".notes-filter");
+        if (!form) return;
+        if (form.dataset.bound === "true") return;
+        form.dataset.bound = "true";
+
+        const input = form.querySelector('input[name="search"]');
+        const tagSelect = form.querySelector('select[name="tag-select"]');
+        const hiddenSelect = form.querySelector('select[name="tag"]');
+        const activeTags = form.querySelector("[data-active-tags]");
+        const list = form.closest(".notes-list");
+        const notes = Array.from(list?.querySelectorAll("[data-note]") || []);
+        const notesPerPage = Number(form.dataset.notesPerPage) || notes.length || 1;
+        const pagination = list?.querySelector("[data-notes-pagination]");
+        const params = new URLSearchParams(window.location.search);
+        const selectedTags = new Set(params.getAll("tag").flatMap((tag) => tag.split(",")).filter(Boolean));
+        let currentPage = Math.max(1, Number(params.get("page")) || 1);
+
+        if (input) input.value = params.get("search") || params.get("q") || "";
+
+        const renderTags = () => {
+          if (!activeTags || !hiddenSelect) return;
+          activeTags.replaceChildren(
+            ...Array.from(selectedTags).map((tag) => {
+              const button = document.createElement("button");
+              button.type = "button";
+              button.dataset.removeTag = tag;
+              button.textContent = `${tag} ×`;
+              return button;
+            })
+          );
+
+          Array.from(hiddenSelect.options).forEach((option) => {
+            option.selected = selectedTags.has(option.value);
+          });
+        };
+
+        const updateUrl = (query, tagsToMatch) => {
+          const nextParams = new URLSearchParams();
+          if (query) nextParams.set("search", query);
+          tagsToMatch.forEach((tag) => nextParams.append("tag", tag));
+          if (currentPage > 1) nextParams.set("page", String(currentPage));
+          const nextUrl = `${window.location.pathname}${nextParams.toString() ? `?${nextParams}` : ""}`;
+          window.history.replaceState({}, "", nextUrl);
+        };
+
+        const renderPagination = (totalPages, totalMatches) => {
+          if (!pagination) return;
+          pagination.hidden = totalMatches <= notesPerPage;
+          if (totalMatches <= notesPerPage) {
+            pagination.replaceChildren();
+            return;
+          }
+
+          const newer = currentPage > 1 ? document.createElement("button") : document.createElement("span");
+          const older = currentPage < totalPages ? document.createElement("button") : document.createElement("span");
+
+          if (currentPage > 1) {
+            newer.type = "button";
+            newer.dataset.pageDirection = "newer";
+            newer.textContent = "← Newer";
+          }
+
+          if (currentPage < totalPages) {
+            older.type = "button";
+            older.dataset.pageDirection = "older";
+            older.textContent = "Older ->";
+          }
+
+          pagination.replaceChildren(newer, older);
+        };
+
+        const applyFilter = () => {
+          const query = (input?.value || "").trim().toLowerCase();
+          const tagsToMatch = Array.from(selectedTags);
+          const matchingNotes = notes.filter((note) => {
+            const title = note.dataset.title || "";
+            const tags = (note.dataset.tags || "").split(",").filter(Boolean);
+            return (!query || title.includes(query)) && tagsToMatch.every((tag) => tags.includes(tag));
+          });
+          const totalPages = Math.max(1, Math.ceil(matchingNotes.length / notesPerPage));
+          if (currentPage > totalPages) currentPage = totalPages;
+          const pageStart = (currentPage - 1) * notesPerPage;
+          const visibleMatches = new Set(matchingNotes.slice(pageStart, pageStart + notesPerPage));
+
+          notes.forEach((note) => {
+            const visible = visibleMatches.has(note);
+            note.classList.toggle("is-filter-hidden", !visible);
+            note.classList.remove("is-extra");
+            note.classList.remove("is-first-visible");
+          });
+          matchingNotes[pageStart]?.classList.add("is-first-visible");
+
+          renderPagination(totalPages, matchingNotes.length);
+          updateUrl(query, tagsToMatch);
+        };
+
+        const addSelectedTag = () => {
+          const tag = tagSelect?.value || "";
+          if (!tag) return;
+          selectedTags.add(tag);
+          currentPage = 1;
+          tagSelect.value = "";
+          renderTags();
+          applyFilter();
+        };
+
+        input?.addEventListener("input", () => {
+          currentPage = 1;
+          applyFilter();
+        });
+        tagSelect?.addEventListener("change", addSelectedTag);
+        activeTags?.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-remove-tag]");
+          if (!button) return;
+          selectedTags.delete(button.dataset.removeTag);
+          currentPage = 1;
+          renderTags();
+          applyFilter();
+        });
+        pagination?.addEventListener("click", (event) => {
+          const button = event.target.closest("[data-page-direction]");
+          if (!button) return;
+          currentPage += button.dataset.pageDirection === "older" ? 1 : -1;
+          applyFilter();
+        });
+        renderTags();
+        applyFilter();
+      };
+
+      document.addEventListener("astro:page-load", initNotesFilter);
+      initNotesFilter();
+
+      if (!window.__tagPopoverBound) {
+        window.__tagPopoverBound = true;
+        document.addEventListener("click", (event) => {
+          const tagHover = event.target.closest(".tag-hover");
+          document.querySelectorAll(".tag-hover.is-open").forEach((openTag) => {
+            if (openTag !== tagHover) openTag.classList.remove("is-open");
+          });
+
+          if (!tagHover) return;
+          if (event.target.closest(".tag-tooltip")) return;
+          tagHover.classList.toggle("is-open");
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key !== "Escape") return;
+          document
+            .querySelectorAll(".tag-hover.is-open")
+            .forEach((openTag) => openTag.classList.remove("is-open"));
+        });
+      }
+    </script>
+  </body>
+</html>

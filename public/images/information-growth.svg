@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">Information growth diagram</title>
+  <desc id="desc">A sequence of increasingly refined approximations converges toward a limit.</desc>
+  <rect width="960" height="420" fill="#f1efe8"/>
+  <path d="M105 315 C235 276 312 246 405 210 C518 166 604 129 855 96" fill="none" stroke="#173f67" stroke-width="3"/>
+  <g fill="#173f67">
+    <circle cx="126" cy="309" r="8"/>
+    <circle cx="258" cy="266" r="8"/>
+    <circle cx="397" cy="214" r="8"/>
+    <circle cx="559" cy="149" r="8"/>
+    <circle cx="742" cy="112" r="8"/>
+  </g>
+  <g fill="none" stroke="#9b3d28" stroke-width="2">
+    <circle cx="126" cy="309" r="34"/>
+    <circle cx="258" cy="266" r="48"/>
+    <circle cx="397" cy="214" r="62"/>
+    <circle cx="559" cy="149" r="76"/>
+    <circle cx="742" cy="112" r="90"/>
+  </g>
+  <g fill="#151515" font-family="New Computer Modern Mono, ui-monospace, monospace" font-size="20">
+    <text x="88" y="366">x₀</text>
+    <text x="222" y="335">x₁</text>
+    <text x="365" y="300">x₂</text>
+    <text x="528" y="250">x₃</text>
+    <text x="704" y="224">sup xᵢ</text>
+  </g>
+  <path d="M812 108 L866 95 L822 129" fill="none" stroke="#173f67" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="104" y="74" fill="#151515" font-family="New Computer Modern, Georgia, serif" font-size="34">approximations preserve directed growth</text>
+</svg>
