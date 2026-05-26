@@ -870,14 +870,16 @@ main {
 
   .site-shell {
     width: min(100% - 32px, var(--max-width));
-    padding-top: calc(var(--header-height) + 34px);
+    padding-top: 24px;
   }
 
   .site-header {
-    top: 34px;
-    width: min(100% - 32px, var(--max-width));
+    position: static;
+    width: 100%;
+    transform: none;
     grid-template-columns: 1fr;
     gap: 12px;
+    margin-bottom: 34px;
   }
 
   .site-header nav {
@@ -918,6 +920,7 @@ main {
 
   .note-preview h2 {
     font-size: 25px;
+    line-height: 1.08;
   }
 
   .pagination {
@@ -930,7 +933,7 @@ main {
     gap: 22px;
     height: auto;
     min-height: 0;
-    padding-top: 34px;
+    padding-top: 0;
     overflow: visible;
   }
 
@@ -948,7 +951,7 @@ main {
   .note-page
   , .about-page
   {
-    padding-top: 0;
+    padding: 0 4px 20px;
   }
 
   .about-page {
@@ -958,7 +961,7 @@ main {
   .article-layout .note-page {
     height: auto;
     overflow: visible;
-    padding-right: 0;
+    padding-right: 4px;
   }
 
   .note-page h1 {
@@ -967,5 +970,10 @@ main {
 
   .prose {
     font-size: 17px;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.7rem;
   }
 }
