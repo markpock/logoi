@@ -32,13 +32,13 @@ But this analysis raises a key question -- what about the form of judgment itsel
 ## Martin-Löf on the analytic-synthetic distinction.
 For now, I will sidestep this thorny question. Instead, I want to consider another framework in which enthymematic judgment does solve a pesky problem. Another way of glossing the *implicit dependence* of the enthymematic judgment on the logical judgment is to say that the enthymematic judgment *suppresses* the evidence of its validity.
 
-This is very similar to Martin-Löf's clarification of the analytic-synthetic distinction.[^2] The paradigmatic synthetic judgment (for Martin-Löf) is $\vdash \phi \; \textsf{true}$ -- that a certain proposition is (hypothetically) true. Martin-Löf contrasts this with the alternative judgment $\vdash p : \phi$ -- that $p$ is a proof of $\phi$. The difference is computational -- $\vdash \phi \; \textsf{true}$ cannot be checked, but $\vdash p : \phi$ can. Thus, Martin-Löf understands analytic judgments as *decidable* judgments.[^3] Just as before, we may write a similar inference rule which showcases this suppression of evidence.
+This is very similar to Martin-Löf's clarification of the analytic-synthetic distinction.[^2] The paradigmatic synthetic judgment (for Martin-Löf) is $\vdash \phi \; \textsf{true}$ -- that a certain proposition $\phi$ is true. Martin-Löf contrasts this with the alternative judgment $\vdash p : \phi$ -- that $p$ is a proof of $\phi$. The difference is computational -- $\vdash \phi \; \textsf{true}$ cannot be checked, but $\vdash p : \phi$ can. Thus, Martin-Löf understands analytic judgments as *decidable* judgments.[^3] Just as before, we may write a similar inference rule which showcases this suppression of evidence.
 
 [^3]: At best a rather bad gloss -- Martin-Löf treats decidability as a crucial consequence of analyticity without bothering to define the notion of analyticity itself, which defeats the point of our current exercise. Martin-Löf instead merely says that the judgment form $\Gamma \vdash t : T$ is an analytic judgment form. Others following in the Martin-Löf tradition have, however, considered this strict identification of the analytic with the decidable, so it is not so objectionable.
 
 $$
 \dfrac{
-    \vdash t : \phi
+    \vdash p : \phi
 }{
     \therefore \; \vdash \phi \; \textsf{true}
 }
@@ -46,7 +46,7 @@ $$
 
 [^2]: See Per Martin-Löf's [Analytic and Synthetic Judgments in Type Theory](https://archive-pml.github.io/martin-lof/pdfs/Martin-Lof-Analytic-and-Synthetic-Judgements-in-Type-Theory.pdf).
 
-I consider this a very satisfying answer to the question of finding a principled analytic/synthetic distinction in artificial languages. But it is worth noting that  -- in classic Martin-Löf fashion -- this approach locates the descriptors analytic and synthetic as applying to different objects from their conventional targets. Namely, this makes *judgments* analytic/synthetic and not *truths* (true propositions).
+I consider this a very satisfying answer to the question of finding a principled analytic/synthetic distinction in artificial languages. But it is worth noting that  -- in classic Martin-Löf fashion -- this approach locates the descriptors analytic and synthetic as applying to different objects from their conventional targets. Namely, this makes *judgment* (forms) analytic/synthetic and not *truths* (true propositions).
 
 It seems that both Kant and later interpreters of Kant have used the terms "analytic judgment" and "analytic truth" or "analytic proposition" interchangeably -- though logical empiricists and later analytic philosophers tend to speak solely of analytic truths. And if the concept "analytic truth" is to capture the idea of a "truth of meaning", perhaps judgments are not the right place to put the notion of analyticity. 
 For even if we consider truth to be a (privileged) *judgment* rather than a model-theoretic notion, we can still speak of "truths" simpliciter -- these are just the propositions $\phi$ such that we may judge $\phi \; \textsf{true}$. And the Martin-Löf distinction says nothing about these.

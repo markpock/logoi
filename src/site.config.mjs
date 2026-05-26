@@ -27,5 +27,6 @@ export const ASSETS = {
     bold: withBase("/fonts/new-computer-modern/NewCM10-Bold.otf"),
     boldItalic: withBase("/fonts/new-computer-modern/NewCM10-BoldItalic.otf"),
   },
+  siteIcon: withBase("/icons/turnstile.svg"),
   tagIcon: withBase("/icons/tag.svg"),
 };

@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #f8f7f4;
   --ink: #121212;
   --rule: #d8d6d0;
@@ -14,6 +14,7 @@
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #151615;
   --ink: #ece8df;
   --rule: #3d3b36;

@@ -59,6 +59,7 @@ const fontStyles = `
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="icon" href={ASSETS.siteIcon} type="image/svg+xml" />
     <link rel="preload" href={ASSETS.fonts.regular} as="font" type="font/otf" crossorigin />
     <link rel="preload" href={ASSETS.fonts.italic} as="font" type="font/otf" crossorigin />
     <link rel="preload" href={ASSETS.fonts.bold} as="font" type="font/otf" crossorigin />
@@ -70,11 +71,9 @@ const fontStyles = `
         background: #f8f7f4;
       }
 
-      @media (prefers-color-scheme: dark) {
-        html,
-        body {
-          background: #151615;
-        }
+      html[data-theme="dark"],
+      html[data-theme="dark"] body {
+        background: #151615;
       }
     </style>
     <script is:inline>
