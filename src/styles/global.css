@@ -631,7 +631,7 @@ main {
 }
 
 .note-page header p,
-.about-page p,
+.about-page > p,
 .prose {
   color: var(--ink);
 }
@@ -811,7 +811,7 @@ main {
   font-size: 0.8em;
 }
 
-.about-page p {
+.about-page > p {
   font-family: var(--serif);
   max-width: 690px;
   margin: 0 0 16px;
@@ -838,6 +838,11 @@ main {
   display: inline-flex;
   flex-direction: column;
   gap: 3px;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--ink);
 }
 

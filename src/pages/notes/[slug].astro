@@ -20,13 +20,16 @@ const notes = (await getCollection("notes"))
 const currentIndex = notes.findIndex((entry) => entry.slug === note.slug);
 const previousNote = notes[currentIndex + 1];
 const nextNote = notes[currentIndex - 1];
+
 const relatedNotes = notes
-  .filter((entry) => entry.slug !== note.slug)
-  .filter((entry) => entry.data.tags.some((tag) => note.data.tags.includes(tag)))
-  .slice(0, 3);
-const sidebarRelated = relatedNotes.length > 0
+    .filter((entry) => entry.slug !== note.slug)
+    .filter((entry) => entry.data.tags.some((tag) => note.data.tags.includes(tag)))
+    .slice(0, 3)
+// Getting rid of related notes for now -- I want to make them explicitly supplied.
+const sidebarRelated = (relatedNotes.length > 0
   ? relatedNotes
-  : notes.filter((entry) => entry.slug !== note.slug).slice(0, 3);
+  : notes.filter((entry) => entry.slug !== note.slug).slice(0, 3)).filter(() => false);
+  
 const { Content, headings } = await note.render();
 const pageHeadings = headings.filter(
   (heading) =>

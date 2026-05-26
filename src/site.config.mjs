@@ -1,7 +1,7 @@
 export const SITE_TITLE = "⊢logoi";
 export const SITE_DESCRIPTION = "notes on logic, computation, language, and philosophy";
-export const SITE_URL = "https://markpock.github.io";
-export const SITE_BASE = "/logoi";
+export const SITE_URL = "https://logoi.blog";
+export const SITE_BASE = "/";
 export const NOTES_PER_PAGE = 5;
 
 export const normalizeBase = (base) => {
