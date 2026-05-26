@@ -1,7 +1,8 @@
 ---
-title: Questions about the early history of analytic philosophy.
+title: The early history of analytic philosophy.
 description: Some consideration of the usual narrative about the early history of analytic philosophy and places where it might be unsettled.
 tags:
+    - essay
     - philosophy
     - analytic-philosophy
 date: 2026-05-26

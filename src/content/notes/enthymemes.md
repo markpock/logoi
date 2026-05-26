@@ -2,6 +2,7 @@
 title: Enthymemes.
 description: "\"Hidden-premise\" judgments and how they can help us make sense of the analytic-synthetic distinction."
 tags:
+    - essay
     - logic
     - philosophy
     - analytic-philosophy

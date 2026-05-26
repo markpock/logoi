@@ -811,13 +811,13 @@ main {
   font-size: 0.8em;
 }
 
-.about-page > p {
+/* .about-page > p {
   font-family: var(--serif);
   max-width: 690px;
   margin: 0 0 16px;
   font-size: 18px;
   line-height: 1.15;
-}
+} */
 
 .post-nav {
   display: grid;
@@ -903,8 +903,9 @@ main {
     padding-top: 0;
   }
 
-  .notes-list h1,
-  .about-page h1 {
+  .notes-list h1
+  /* , .about-page h1 */
+  {
     margin-bottom: 28px;
     font-size: 31px;
   }
@@ -944,8 +945,9 @@ main {
     display: none;
   }
 
-  .note-page,
-  .about-page {
+  .note-page
+  , .about-page
+  {
     padding-top: 0;
   }
 
