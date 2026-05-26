@@ -12,9 +12,9 @@ An enthymeme is a hidden-premise judgment. For example,
 1. Socrates is a man. [Premise]
 2. Therefore, Socrates is mortal. [Conclusion]
 
-We reasoned to the conclusion from the hidden premise that all men are mortal. In practice, most of our judgments are enthymematic -- no one would find the argument above objectionable. As such, Aristotle took enthymemes to be the paradigm of rhetorical argument.[^1]
+We reasoned to the conclusion from the hidden premise that all men are mortal. In practice, most of our judgments are enthymematic -- no one would find the argument above objectionable. As such, Aristotle took enthymemes to be the paradigm of rhetorical argument.[^AristotleProof]
 
-[^1]: Aristotle called this form of argument *proof*, as opposed to *demonstration* (which is what we today understand as rigorous proof).
+[^AristotleProof]: Aristotle called this form of argument *proof*, as opposed to *demonstration* (which is what we today understand as rigorous proof).
 
 What distinguishes a good enthymeme from a bad one? Intuitively, an enthymeme is made good when the hearer believes a hidden premise that would make the enthymeme valid. This gives rise to something like a *holism* -- the validity of (enthymematic) judgments depends not just on the logical entailment between the premises and the conclusion, but also the surrounding web of belief.
 
@@ -27,14 +27,17 @@ $$
 }
 $$
 
-But this analysis raises a key question -- what about the form of judgment itself? At least in Quine's web of belief, logic is part of the web, just like any other form of knowledge. That is, the validity of the judgment $B, \Gamma \vdash \phi$ is hardly independent of $B$, for $B$ sets up a criterion according to which we adjudge the validity of judgments. Indeed, in practice, we do often (at least in logic!) dispute what forms of judgment are valid (for example, see the recent interest in substructural logics). How can a body of knowledge bind itself -- set an immanent criterion for its own validity?
+But this analysis raises a key question -- what about the form of judgment itself? At least in Quine's web of belief, logic is part of the web, just like any other form of knowledge. That is, the validity of the judgment $B, \Gamma \vdash \phi$ is hardly independent of $B$, for $B$ sets up a criterion according to which we adjudge the validity of judgments. Indeed, in practice, we do often (at least in logic!) dispute what forms of judgment are valid. For example, see how antirealists have closely followed substructural logics and championed substructural logics as logics which actually reflect the structure of good inference.[^AntirealismSubstructuralLogic] How can a body of knowledge bind itself -- set an immanent criterion for its own validity?
+[^AntirealismSubstructuralLogic]: A stray example -- see Dubucs and Marion, [Radical Anti-realism and Substructural Logics.](https://shs.hal.science/halshs-00000055/file/krakow.pdf) We can also consider the work on substructural logic coming out of Pittsburgh.
 
 ## Martin-Löf on the analytic-synthetic distinction.
 For now, I will sidestep this thorny question. Instead, I want to consider another framework in which enthymematic judgment does solve a pesky problem. Another way of glossing the *implicit dependence* of the enthymematic judgment on the logical judgment is to say that the enthymematic judgment *suppresses* the evidence of its validity.
 
-This is very similar to Martin-Löf's clarification of the analytic-synthetic distinction.[^2] The paradigmatic synthetic judgment (for Martin-Löf) is $\vdash \phi \; \textsf{true}$ -- that a certain proposition $\phi$ is true. Martin-Löf contrasts this with the alternative judgment $\vdash p : \phi$ -- that $p$ is a proof of $\phi$. The difference is computational -- $\vdash \phi \; \textsf{true}$ cannot be checked, but $\vdash p : \phi$ can. Thus, Martin-Löf understands analytic judgments as *decidable* judgments.[^3] Just as before, we may write a similar inference rule which showcases this suppression of evidence.
+This is very similar to Martin-Löf's clarification of the analytic-synthetic distinction.[^MartinLofCitation] The paradigmatic synthetic judgment (for Martin-Löf) is $\vdash \phi \; \textsf{true}$ -- that a certain proposition $\phi$ is true. Martin-Löf contrasts this with the alternative judgment $\vdash p : \phi$ -- that $p$ is a proof of $\phi$. The difference is computational -- $\vdash \phi \; \textsf{true}$ cannot be checked, but $\vdash p : \phi$ can. Thus, Martin-Löf understands analytic judgments as *decidable* judgments.[^AnalyticityAsDecidability] Just as before, we may write a similar inference rule which showcases this suppression of evidence.
 
-[^3]: At best a rather bad gloss -- Martin-Löf treats decidability as a crucial consequence of analyticity without bothering to define the notion of analyticity itself, which defeats the point of our current exercise. Martin-Löf instead merely says that the judgment form $\Gamma \vdash t : T$ is an analytic judgment form. Others following in the Martin-Löf tradition have, however, considered this strict identification of the analytic with the decidable, so it is not so objectionable.
+[^MartinLofCitation]: See Per Martin-Löf's [Analytic and Synthetic Judgments in Type Theory](https://archive-pml.github.io/martin-lof/pdfs/Martin-Lof-Analytic-and-Synthetic-Judgements-in-Type-Theory.pdf).
+
+[^AnalyticityAsDecidability]: At best a rather bad gloss -- Martin-Löf treats decidability as a crucial consequence of analyticity without bothering to rigorously define the notion of analyticity itself, which defeats the point of our current exercise. Martin-Löf instead merely says that on the conventional informal definition of analyticity, the judgment form $\Gamma \vdash t : T$ is an analytic judgment form. Others following in the Martin-Löf tradition have, however, considered this strict identification of the analytic with the decidable, so it is not so objectionable.
 
 $$
 \dfrac{
@@ -43,8 +46,6 @@ $$
     \therefore \; \vdash \phi \; \textsf{true}
 }
 $$
-
-[^2]: See Per Martin-Löf's [Analytic and Synthetic Judgments in Type Theory](https://archive-pml.github.io/martin-lof/pdfs/Martin-Lof-Analytic-and-Synthetic-Judgements-in-Type-Theory.pdf).
 
 I consider this a very satisfying answer to the question of finding a principled analytic/synthetic distinction in artificial languages. But it is worth noting that  -- in classic Martin-Löf fashion -- this approach locates the descriptors analytic and synthetic as applying to different objects from their conventional targets. Namely, this makes *judgment* (forms) analytic/synthetic and not *truths* (true propositions).
 
