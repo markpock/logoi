@@ -18,7 +18,7 @@ export const withBase = (path = "/") => {
 };
 
 export const siteTitle = (pageTitle) =>
-  pageTitle ? `${pageTitle} | ${SITE_TITLE}` : SITE_TITLE;
+  pageTitle ? `${SITE_TITLE} | ${pageTitle}` : SITE_TITLE;
 
 export const ASSETS = {
   fonts: {
