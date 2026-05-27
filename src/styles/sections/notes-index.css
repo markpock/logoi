@@ -160,11 +160,12 @@
 }
 
 .note-preview h2 {
+  max-width: 690px;
   margin: 0 0 16px;
   font-family: var(--serif);
   font-size: 27px;
   font-weight: 400;
-  line-height: 0.6;
+  line-height: 1.05;
 }
 
 .tag-hover {

@@ -10,6 +10,8 @@
   gap: 4px 36px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--rule);
+  background: var(--bg);
+  box-shadow: 0 -24px 0 24px var(--bg);
 }
 
 .brand {

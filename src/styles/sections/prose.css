@@ -68,6 +68,154 @@
   color: var(--link);
 }
 
+.prose blockquote {
+  margin: 20px 0;
+  padding: 0 0 0 18px;
+  border-left: 2px solid var(--rule);
+  color: var(--ink);
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.prose .callout,
+.prose .line-quote {
+  margin: 24px 0;
+}
+
+.prose .quote-callout {
+  --callout-bg: color-mix(in srgb, var(--link) 8%, var(--bg));
+  --callout-border: color-mix(in srgb, var(--link) 30%, var(--rule));
+  --callout-accent: var(--callout-border);
+  padding: 18px 20px;
+  background: var(--callout-bg);
+}
+
+.prose .quote-callout.callout--border {
+  border: 1px solid var(--callout-border);
+}
+
+.prose .quote-callout.callout--sidebar {
+  border-left: 5px solid var(--callout-accent);
+  padding-left: 18px;
+}
+
+.prose .quote-callout.callout--reveal {
+  --callout-bg: var(--bg);
+  --callout-border: var(--ink);
+  --callout-accent: var(--ink);
+}
+
+.prose .quote-callout.callout--reveal:focus {
+  outline: 1px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.prose .quote-callout blockquote {
+  margin: 0;
+  padding: 0;
+  border-left: 0;
+}
+
+.prose .quote-callout blockquote + p,
+.prose .line-quote blockquote + p {
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.prose .quote-callout > :last-child,
+.prose .line-quote > :last-child {
+  margin-bottom: 0;
+}
+
+.prose .quote-explanation {
+  display: none;
+}
+
+.prose .quote-explanation > :last-child {
+  margin-bottom: 0;
+}
+
+.prose .quote-callout.callout--reveal.callout--has-explanation:is(:hover, :focus, :focus-within, .is-revealed)
+  > blockquote,
+.prose .quote-callout.callout--reveal.callout--has-explanation:is(:hover, :focus, :focus-within, .is-revealed)
+  > blockquote
+  + p {
+  display: none;
+}
+
+.prose .quote-callout.callout--reveal.callout--has-explanation:is(:hover, :focus, :focus-within, .is-revealed)
+  > .quote-explanation {
+  display: block;
+}
+
+.prose .callout--amber {
+  --callout-bg: color-mix(in srgb, #c58f42 14%, var(--bg));
+  --callout-border: color-mix(in srgb, #96642c 45%, var(--rule));
+  --callout-accent: #ad7130;
+}
+
+.prose .callout--blue {
+  --callout-bg: color-mix(in srgb, #5d83ad 14%, var(--bg));
+  --callout-border: color-mix(in srgb, #315f8d 45%, var(--rule));
+  --callout-accent: #406f9f;
+}
+
+.prose .callout--green {
+  --callout-bg: color-mix(in srgb, #87906a 14%, var(--bg));
+  --callout-border: color-mix(in srgb, #676f43 45%, var(--rule));
+  --callout-accent: #737a4e;
+}
+
+.prose .callout--rose {
+  --callout-bg: color-mix(in srgb, #b27668 14%, var(--bg));
+  --callout-border: color-mix(in srgb, #874f44 45%, var(--rule));
+  --callout-accent: #995c50;
+}
+
+:root[data-theme="dark"] .prose .callout--amber {
+  --callout-bg: color-mix(in srgb, #c58f42 14%, #f8f7f4);
+  --callout-border: color-mix(in srgb, #96642c 45%, #d8d6d0);
+  --callout-accent: #ad7130;
+}
+
+:root[data-theme="dark"] .prose .callout--blue {
+  --callout-bg: color-mix(in srgb, #5d83ad 14%, #f8f7f4);
+  --callout-border: color-mix(in srgb, #315f8d 45%, #d8d6d0);
+  --callout-accent: #406f9f;
+}
+
+:root[data-theme="dark"] .prose .callout--green {
+  --callout-bg: color-mix(in srgb, #87906a 14%, #f8f7f4);
+  --callout-border: color-mix(in srgb, #676f43 45%, #d8d6d0);
+  --callout-accent: #737a4e;
+}
+
+:root[data-theme="dark"] .prose .callout--rose {
+  --callout-bg: color-mix(in srgb, #b27668 14%, #f8f7f4);
+  --callout-border: color-mix(in srgb, #874f44 45%, #d8d6d0);
+  --callout-accent: #995c50;
+}
+
+:root[data-theme="dark"] .prose .quote-callout,
+:root[data-theme="dark"] .prose .quote-callout blockquote {
+  color: #121212;
+}
+
+.prose .line-quote {
+  padding-left: 18px;
+  border-left: 2px solid var(--link);
+}
+
+.prose .line-quote blockquote {
+  margin: 0;
+  padding: 0;
+  border-left: 0;
+}
+
 .prose img {
   display: block;
   width: 100%;

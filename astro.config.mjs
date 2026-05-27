@@ -1,6 +1,8 @@
 import { defineConfig } from "astro/config";
 import remarkMath from "remark-math";
+import remarkDirective from "remark-directive";
 import rehypeKatex from "rehype-katex";
+import remarkCallouts from "./src/markdown/remarkCallouts.mjs";
 import { BASE_PATH, SITE_URL } from "./src/site.config.mjs";
 
 export default defineConfig({
@@ -19,7 +21,7 @@ export default defineConfig({
       },
     },
     gfm: true,
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkDirective, remarkCallouts],
     rehypePlugins: [rehypeKatex],
   },
 });

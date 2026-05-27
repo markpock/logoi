@@ -1,0 +1,21 @@
+---
+import { getEntry } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteTitle } from "../site.config.mjs";
+
+const quotes = await getEntry("pages", "quotes");
+if (!quotes) {
+  throw new Error("Missing quotes page content");
+}
+
+const { Content } = await quotes.render();
+---
+
+<BaseLayout title={siteTitle(quotes.data.title)} description={quotes.data.description}>
+  <article class="about-page">
+    <h1>{quotes.data.title}</h1>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -13,7 +13,9 @@
     "astro": "^4.16.18",
     "katex": "^0.16.11",
     "rehype-katex": "^7.0.1",
+    "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "unist-util-visit": "^5.1.0"
   }
 }
