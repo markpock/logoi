@@ -1,0 +1,83 @@
+.site-header {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  z-index: 10;
+  width: min(var(--max-width), calc(100% - 48px));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 36px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+  font-family: var(--serif);
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.site-header p {
+  max-width: none;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  padding-top: 7px;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.theme-toggle {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+
+.theme-toggle span {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+}
+
+.theme-toggle span::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--bg);
+}
+
+:root[data-theme="dark"] .theme-toggle span::after {
+  top: 3px;
+  right: 3px;
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+}
+
+.site-header nav a,
+.read-more,
+.back-link {
+  color: var(--link);
+}

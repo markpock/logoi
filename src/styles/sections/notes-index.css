@@ -1,0 +1,271 @@
+.notes-list {
+  padding-top: 0;
+}
+
+.notes-list h1,
+.about-page h1 {
+  margin: 0 0 28px;
+  font-family: var(--serif);
+  font-size: 33px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.notes-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  margin: -8px 0 26px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+
+.notes-filter label {
+  display: inline-grid;
+  gap: 0;
+}
+
+.notes-filter label:first-child {
+  flex: 1 1 300px;
+  width: min(100%, 500px);
+  max-width: 500px;
+}
+
+.notes-filter label:nth-child(2) {
+  flex: 1 1 300px;
+  width: auto;
+  max-width: 520px;
+}
+
+.notes-filter span {
+  color: var(--ink);
+}
+
+.notes-filter input,
+.notes-filter select {
+  width: 180px;
+  height: 34px;
+  padding: 6px 8px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  color: var(--ink);
+  background: var(--bg);
+  font: inherit;
+}
+
+.notes-filter input:focus,
+.notes-filter select:focus {
+  outline: 0;
+  border-bottom-color: var(--link);
+}
+
+.notes-filter input {
+  width: 100%;
+  min-width: 180px;
+  max-width: 500px;
+}
+
+.notes-filter input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.notes-filter select {
+  width: 92px;
+  color: var(--muted);
+}
+
+.notes-filter select option {
+  color: var(--ink);
+}
+
+.notes-filter select option[value=""] {
+  color: var(--muted);
+}
+
+.tag-filter-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.tag-filter-control select {
+  order: 1;
+  flex: 0 0 auto;
+}
+
+.active-tags button {
+  height: 34px;
+  padding: 6px 0;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--link);
+  background: var(--bg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.active-tags {
+  order: 2;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.active-tags:empty {
+  display: none;
+}
+
+.note-preview {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 34px;
+  align-items: start;
+  padding: 26px 0 25px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.note-preview.is-extra,
+.note-preview.is-filter-hidden {
+  display: none;
+}
+
+.note-preview:first-of-type,
+.note-preview.is-first-visible {
+  padding-top: 0;
+}
+
+.note-preview time,
+.note-page time {
+  color: var(--ink);
+}
+
+.note-meta {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 0;
+}
+
+.note-meta time {
+  line-height: 1.2;
+}
+
+.note-preview h2 {
+  margin: 0 0 16px;
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 0.6;
+}
+
+.tag-hover {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.tag-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  background: currentColor;
+  color: var(--link);
+  mask: var(--tag-icon-mask);
+  -webkit-mask: var(--tag-icon-mask);
+}
+
+.tag-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: max-content;
+  max-width: calc(100vw - 48px);
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.tag-hover:hover .tag-tooltip,
+.tag-hover:focus-within .tag-tooltip,
+.tag-hover.is-open .tag-tooltip {
+  display: grid;
+  gap: 4px;
+}
+
+.tag-tooltip a {
+  display: block;
+  width: max-content;
+  max-width: calc(100vw - 68px);
+  overflow-wrap: anywhere;
+  color: var(--link);
+}
+
+.note-preview:nth-last-child(-n + 2) .tag-tooltip {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
+.note-preview p {
+  max-width: 690px;
+  margin: 0 0 12px;
+  color: var(--ink);
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 34px;
+  margin-top: 28px;
+  font-size: 14px;
+}
+
+.pagination a,
+.pagination button {
+  color: var(--link);
+}
+
+.pagination button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.pagination a:first-child {
+  justify-self: start;
+}
+
+.pagination button:first-child {
+  justify-self: start;
+}
+
+.pagination button:last-child {
+  justify-self: end;
+}
+
+.pagination a:last-child,
+.pagination button:last-child,
+.pagination span:last-child {
+  text-align: right;
+}

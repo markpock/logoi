@@ -1,0 +1,70 @@
+---
+import { withBase } from "../site.config.mjs";
+
+const { note, pageHeadings, tableOfContents, sidebarRelated, formatDate } = Astro.props;
+---
+
+<aside class="article-sidebar" aria-label="Note details">
+  <a class="back-link" href={withBase("/")}>← All notes</a>
+  <section>
+    <h2>Written on</h2>
+    <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+  </section>
+  {pageHeadings.length > 0 && (
+    <section>
+      <h2>On this page</h2>
+      <ol class="toc-list">
+        {tableOfContents.map((heading) => (
+          <li>
+            {heading.children.length > 0 ? (
+              <div class="toc-group">
+                <div class="toc-parent">
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                  <label class="toc-toggle" aria-label={`Toggle subsections for ${heading.text}`}>
+                    <input type="checkbox" class="toc-checkbox" />
+                    <span class="caret-down" aria-hidden="true">⌄</span>
+                    <span class="caret-right" aria-hidden="true">›</span>
+                  </label>
+                </div>
+                <ol>
+                  {heading.children.map((child) => (
+                    <li>
+                      <a href={`#${child.slug}`}>{child.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : (
+              <div class="toc-row">
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+  {note.data.tags.length > 0 && (
+    <section>
+      <h2>Tags</h2>
+      <ul class="tag-list">
+        {note.data.tags.map((tag) => (
+          <li><a href={withBase(`/?tag=${encodeURIComponent(tag)}`)}>{tag}</a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+  {sidebarRelated.length > 0 && (
+    <section>
+      <h2>Related</h2>
+      <ul class="related-list">
+        {sidebarRelated.map((entry) => (
+          <li>
+            <a href={withBase(`/notes/${entry.slug}/`)}>{entry.data.title}</a>
+            <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</aside>

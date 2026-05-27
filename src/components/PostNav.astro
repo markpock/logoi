@@ -1,0 +1,26 @@
+---
+import { withBase } from "../site.config.mjs";
+
+const { previousNote, nextNote } = Astro.props;
+---
+
+{(previousNote || nextNote) && (
+  <nav class="post-nav" aria-label="Adjacent notes">
+    <div>
+      {previousNote && (
+        <a href={withBase(`/notes/${previousNote.slug}/`)}>
+          <span>← Previous</span>
+          {previousNote.data.title}
+        </a>
+      )}
+    </div>
+    <div>
+      {nextNote && (
+        <a href={withBase(`/notes/${nextNote.slug}/`)}>
+          <span>Next →</span>
+          {nextNote.data.title}
+        </a>
+      )}
+    </div>
+  </nav>
+)}

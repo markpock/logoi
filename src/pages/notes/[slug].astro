@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
+import ArticleSidebar from "../../components/ArticleSidebar.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { siteTitle, withBase } from "../../site.config.mjs";
+import PostNav from "../../components/PostNav.astro";
+import { siteTitle } from "../../site.config.mjs";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -59,72 +61,18 @@ const formatDate = (date: Date) =>
   });
 ---
 
-<BaseLayout title={siteTitle(note.data.title)} description={note.data.description} bodyClass="article-body">
+<BaseLayout
+  title={siteTitle(note.data.title)}
+  description={note.data.description}
+  bodyClass="article-body">
   <div class="article-layout">
-    <aside class="article-sidebar" aria-label="Note details">
-      <a class="back-link" href={withBase("/")}>← All notes</a>
-      <section>
-        <h2>Written on</h2>
-        <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
-      </section>
-      {pageHeadings.length > 0 && (
-        <section>
-          <h2>On this page</h2>
-          <ol class="toc-list">
-            {tableOfContents.map((heading) => (
-              <li>
-                {heading.children.length > 0 ? (
-                  <div class="toc-group">
-                    <div class="toc-parent">
-                      <a href={`#${heading.slug}`}>{heading.text}</a>
-                      <label class="toc-toggle" aria-label={`Toggle subsections for ${heading.text}`}>
-                        <input type="checkbox" class="toc-checkbox" />
-                        <span class="caret-down" aria-hidden="true">⌄</span>
-                        <span class="caret-right" aria-hidden="true">›</span>
-                      </label>
-                    </div>
-                    <ol>
-                      {heading.children.map((child) => (
-                        <li>
-                          <a href={`#${child.slug}`}>{child.text}</a>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                ) : (
-                  <div class="toc-row">
-                    <a href={`#${heading.slug}`}>{heading.text}</a>
-                  </div>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-      {note.data.tags.length > 0 && (
-        <section>
-          <h2>Tags</h2>
-          <ul class="tag-list">
-            {note.data.tags.map((tag) => (
-              <li><a href={withBase(`/?tag=${encodeURIComponent(tag)}`)}>{tag}</a></li>
-            ))}
-          </ul>
-        </section>
-      )}
-      {sidebarRelated.length > 0 && (
-        <section>
-          <h2>Related</h2>
-          <ul class="related-list">
-            {sidebarRelated.map((entry) => (
-              <li>
-                <a href={withBase(`/notes/${entry.slug}/`)}>{entry.data.title}</a>
-                <time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-    </aside>
+    <ArticleSidebar
+      note={note}
+      pageHeadings={pageHeadings}
+      tableOfContents={tableOfContents}
+      sidebarRelated={sidebarRelated}
+      formatDate={formatDate}
+    />
     <article class="note-page">
       <header>
         <h1>{note.data.title}</h1>
@@ -133,24 +81,7 @@ const formatDate = (date: Date) =>
       <div class="prose">
         <Content />
       </div>
-      {(previousNote || nextNote) && <nav class="post-nav" aria-label="Adjacent notes">
-        <div>
-          {previousNote && (
-            <a href={withBase(`/notes/${previousNote.slug}/`)}>
-              <span>← Previous</span>
-              {previousNote.data.title}
-            </a>
-          )}
-        </div>
-        <div>
-          {nextNote && (
-            <a href={withBase(`/notes/${nextNote.slug}/`)}>
-              <span>Next →</span>
-              {nextNote.data.title}
-            </a>
-          )}
-        </div>
-      </nav>}
+      <PostNav previousNote={previousNote} nextNote={nextNote} />
     </article>
   </div>
 </BaseLayout>

@@ -1,0 +1,31 @@
+---
+import { withBase } from "../site.config.mjs";
+
+const { note, index, notesPerPage, formatDate } = Astro.props;
+---
+
+<article
+  class:list={["note-preview", index >= notesPerPage && "is-extra"]}
+  data-note
+  data-title={note.data.title.toLowerCase()}
+  data-tags={note.data.tags.join(",")}
+>
+  <div class="note-meta">
+    {note.data.tags.length > 0 && (
+      <div class="tag-hover">
+        <span class="tag-icon" role="img" aria-label="Tags"></span>
+        <div class="tag-tooltip" role="tooltip">
+          {note.data.tags.map((tag) => (
+            <a href={withBase(`/?tag=${encodeURIComponent(tag)}`)}>{tag}</a>
+          ))}
+        </div>
+      </div>
+    )}
+    <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+  </div>
+  <div>
+    <h2><a href={withBase(`/notes/${note.slug}/`)}>{note.data.title}</a></h2>
+    {note.data.description && <p>{note.data.description}</p>}
+    <a class="read-more" href={withBase(`/notes/${note.slug}/`)}>Read more -></a>
+  </div>
+</article>

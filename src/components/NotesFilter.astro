@@ -1,0 +1,25 @@
+---
+const { tags, notesPerPage } = Astro.props;
+---
+
+<form class="notes-filter" role="search" aria-label="Filter notes" data-notes-per-page={notesPerPage}>
+  <label>
+    <span class="visually-hidden">Search</span>
+    <input type="search" name="search" placeholder="Search..." autocomplete="off" />
+  </label>
+  {tags.length > 0 && (
+    <label>
+      <span class="visually-hidden">Tags</span>
+      <span class="tag-filter-control">
+        <select name="tag-select">
+          <option value="">Add tag</option>
+          {tags.map((tag) => <option value={tag}>{tag}</option>)}
+        </select>
+        <span class="active-tags" data-active-tags></span>
+      </span>
+      <select name="tag" hidden multiple aria-hidden="true">
+        {tags.map((tag) => <option value={tag}>{tag}</option>)}
+      </select>
+    </label>
+  )}
+</form>

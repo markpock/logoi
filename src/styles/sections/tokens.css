@@ -1,0 +1,25 @@
+:root {
+  color-scheme: light;
+  --bg: #f8f7f4;
+  --ink: #121212;
+  --rule: #d8d6d0;
+  --link: #153c67;
+  --link-hover: #8a3a25;
+  --muted: #77736c;
+  --soft: rgba(255, 255, 255, 0.82);
+  --max-width: 1080px;
+  --header-height: 122px;
+  --serif: "New Computer Modern", "Century Schoolbook", "New York", Palatino, "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #151615;
+  --ink: #ece8df;
+  --rule: #3d3b36;
+  --link: #9ebde1;
+  --link-hover: #f0b090;
+  --muted: #aaa59b;
+  --soft: rgba(28, 29, 28, 0.88);
+}

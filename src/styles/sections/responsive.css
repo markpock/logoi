@@ -1,0 +1,114 @@
+@media (max-width: 720px) {
+  :root {
+    --header-height: 170px;
+  }
+
+  .site-shell {
+    width: min(100% - 32px, var(--max-width));
+    padding-top: 24px;
+  }
+
+  .site-header {
+    position: static;
+    width: 100%;
+    transform: none;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 34px;
+  }
+
+  .site-header nav {
+    grid-row: auto;
+    grid-column: auto;
+    gap: 28px;
+    padding-top: 10px;
+  }
+
+  .site-header p {
+    white-space: normal;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+  }
+
+  .brand {
+    font-size: 28px;
+  }
+
+  .notes-list {
+    padding-top: 0;
+  }
+
+  .notes-list h1
+  /* , .about-page h1 */
+  {
+    margin-bottom: 28px;
+    font-size: 31px;
+  }
+
+  .note-preview {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 0;
+  }
+
+  .note-preview h2 {
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .pagination {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    height: auto;
+    min-height: 0;
+    padding-top: 0;
+    overflow: visible;
+  }
+
+  .article-sidebar {
+    height: auto;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .article-sidebar section:nth-of-type(n + 3),
+  .article-sidebar section:last-of-type {
+    display: none;
+  }
+
+  .note-page
+  , .about-page
+  {
+    padding: 0 4px 20px;
+  }
+
+  .about-page {
+    margin-left: 0;
+  }
+
+  .article-layout .note-page {
+    height: auto;
+    overflow: visible;
+    padding-right: 4px;
+  }
+
+  .note-page h1 {
+    font-size: 32px;
+  }
+
+  .prose {
+    font-size: 17px;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.7rem;
+  }
+}

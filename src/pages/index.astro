@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import NotePreview from "../components/NotePreview.astro";
+import NotesFilter from "../components/NotesFilter.astro";
 import { NOTES_PER_PAGE, SITE_TITLE, withBase } from "../site.config.mjs";
 
 const notes = (await getCollection("notes"))
@@ -20,53 +22,9 @@ const formatDate = (date: Date) =>
 <BaseLayout title={SITE_TITLE}>
   <section class="notes-list" aria-labelledby="notes-heading">
     <h1 id="notes-heading"><a href={withBase("/")}>Notes</a></h1>
-    <form class="notes-filter" role="search" aria-label="Filter notes" data-notes-per-page={NOTES_PER_PAGE}>
-      <label>
-        <span class="visually-hidden">Search</span>
-        <input type="search" name="search" placeholder="Search..." autocomplete="off" />
-      </label>
-      {allTags.length > 0 && (
-        <label>
-          <span class="visually-hidden">Tags</span>
-          <span class="tag-filter-control">
-            <select name="tag-select">
-              <option value="">Add tag</option>
-              {allTags.map((tag) => <option value={tag}>{tag}</option>)}
-            </select>
-            <span class="active-tags" data-active-tags></span>
-          </span>
-          <select name="tag" hidden multiple aria-hidden="true">
-            {allTags.map((tag) => <option value={tag}>{tag}</option>)}
-          </select>
-        </label>
-      )}
-    </form>
+    <NotesFilter tags={allTags} notesPerPage={NOTES_PER_PAGE} />
     {notes.map((note, index) => (
-      <article
-        class:list={["note-preview", index >= NOTES_PER_PAGE && "is-extra"]}
-        data-note
-        data-title={note.data.title.toLowerCase()}
-        data-tags={note.data.tags.join(",")}
-      >
-        <div class="note-meta">
-          {note.data.tags.length > 0 && (
-            <div class="tag-hover">
-              <span class="tag-icon" role="img" aria-label="Tags"></span>
-              <div class="tag-tooltip" role="tooltip">
-                {note.data.tags.map((tag) => (
-                  <a href={withBase(`/?tag=${encodeURIComponent(tag)}`)}>{tag}</a>
-                ))}
-              </div>
-            </div>
-          )}
-          <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
-        </div>
-        <div>
-          <h2><a href={withBase(`/notes/${note.slug}/`)}>{note.data.title}</a></h2>
-          {note.data.description && <p>{note.data.description}</p>}
-          <a class="read-more" href={withBase(`/notes/${note.slug}/`)}>Read more -></a>
-        </div>
-      </article>
+      <NotePreview note={note} index={index} notesPerPage={NOTES_PER_PAGE} formatDate={formatDate} />
     ))}
     <nav class="pagination" aria-label="Notes pagination" data-notes-pagination></nav>
   </section>
