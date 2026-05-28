@@ -28,6 +28,31 @@ $$
 ![Alt text.](/images/link) for images.
 ```
 
+## Callouts
+
+Use callouts in Markdown with container directives:
+
+```md
+:::callout{tone="blue" sidebar="medium" reveal}
+Quote or callout text.
+
+Attribution or supporting text.
+
+:::quote-explanation
+Text shown when the callout is hovered or clicked.
+:::
+:::
+```
+
+Available tones are `transparent`, `violet`, `blue`, `green`, `rose`, `amber`, `teal`, and `slate`. Omit `tone` for a transparent callout.
+
+Sidebar thicknesses are `none`, `thin` (2px), `medium` (3px), and `thick` (7px). You can also pass an explicit CSS length, such as `sidebar="5px"`.
+
+Other options:
+- `sidebar` adds a left rule.
+- `border` adds a full border.
+- `reveal` swaps to a nested `quote-explanation` on hover or click.
+
 ## Local development
 
 ```sh
