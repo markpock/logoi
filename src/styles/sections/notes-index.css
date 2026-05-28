@@ -207,6 +207,11 @@
   gap: 4px;
 }
 
+.has-open-tag .tag-hover:not(.is-open):hover .tag-tooltip,
+.has-open-tag .tag-hover:not(.is-open):focus-within .tag-tooltip {
+  display: none;
+}
+
 .tag-tooltip a {
   display: block;
   width: max-content;

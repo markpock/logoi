@@ -1,3 +1,8 @@
+const syncOpenTagClass = () => {
+  const anyOpen = document.querySelector(".tag-hover.is-open") !== null;
+  document.body.classList.toggle("has-open-tag", anyOpen);
+};
+
 if (!window.__tagPopoverBound) {
   window.__tagPopoverBound = true;
   document.addEventListener("click", (event) => {
@@ -9,6 +14,7 @@ if (!window.__tagPopoverBound) {
     if (!tagHover) return;
     if (event.target.closest(".tag-tooltip")) return;
     tagHover.classList.toggle("is-open");
+    syncOpenTagClass();
   });
 
   document.addEventListener("keydown", (event) => {
@@ -16,5 +22,6 @@ if (!window.__tagPopoverBound) {
     document
       .querySelectorAll(".tag-hover.is-open")
       .forEach((openTag) => openTag.classList.remove("is-open"));
+    syncOpenTagClass();
   });
 }
