@@ -32,7 +32,6 @@ const finishAnimation = (callout, id, wasRevealing) => {
   callout.style.transition = "";
   callout.classList.remove("is-animating");
   delete callout.dataset.animId;
-  delete callout.dataset.animDir;
 
   if (wasRevealing && callout.dataset.hoverEnded && !callout.classList.contains("is-pinned")) {
     delete callout.dataset.hoverEnded;
@@ -42,13 +41,6 @@ const finishAnimation = (callout, id, wasRevealing) => {
 
 const setRevealed = (callout, reveal) => {
   ensureButton(callout);
-
-  // Animations always run to completion. Block hover-triggered reveals during a
-  // hide (prevents the expanding-box-hits-mouse oscillation). Allow click-triggered
-  // reveals (caller sets is-pinned before calling, so the guard passes).
-  if (reveal && callout.dataset.animDir === "hiding" && !callout.classList.contains("is-pinned")) {
-    return;
-  }
 
   if (callout.classList.contains("is-revealed") === reveal) {
     syncCallout(callout);
@@ -65,9 +57,6 @@ const setRevealed = (callout, reveal) => {
   callout.classList.toggle("is-revealed", reveal);
   syncCallout(callout);
 
-  // Temporarily remove the explicit height to measure the true content height.
-  // Without this, scrollHeight returns max(startHeight, contentHeight) which
-  // equals startHeight when startHeight >= content — making the animation a no-op.
   callout.style.height = "";
   const targetHeight = callout.scrollHeight;
   callout.style.height = `${startHeight}px`;
@@ -76,7 +65,6 @@ const setRevealed = (callout, reveal) => {
   callout.style.transition = "";
 
   callout.classList.add("is-animating");
-  callout.dataset.animDir = reveal ? "revealing" : "hiding";
   const id = String(Date.now() + Math.random());
   callout.dataset.animId = id;
 
@@ -98,17 +86,17 @@ const initCallouts = () => {
 if (!window.__quoteRevealBound) {
   window.__quoteRevealBound = true;
 
+  // Click: toggle pin on callout body or caret button
   document.addEventListener("click", (e) => {
     const btn = e.target.closest?.(".callout-expand");
     if (btn) {
       const callout = btn.closest(".callout.callout--has-explanation");
       if (!callout) return;
       e.preventDefault();
+      e.stopPropagation();
       const willPin = !callout.classList.contains("is-pinned");
       callout.classList.toggle("is-pinned", willPin);
       delete callout.dataset.hoverEnded;
-      if (!willPin) callout.dataset.noHover = "1";
-      else delete callout.dataset.noHover;
       setRevealed(callout, willPin);
       return;
     }
@@ -123,52 +111,41 @@ if (!window.__quoteRevealBound) {
       return;
     }
 
-    if (callout.classList.contains("is-pinned")) {
-      callout.classList.remove("is-pinned");
-      delete callout.dataset.hoverEnded;
-      callout.dataset.noHover = "1";
-      setRevealed(callout, false);
-    } else {
-      callout.classList.add("is-pinned");
-      delete callout.dataset.noHover;
-      delete callout.dataset.hoverEnded;
-      setRevealed(callout, true);
-    }
+    const willPin = !callout.classList.contains("is-pinned");
+    callout.classList.toggle("is-pinned", willPin);
+    delete callout.dataset.hoverEnded;
+    setRevealed(callout, willPin);
   });
 
+  // Caret hover: reveal fully, then hide after animation completes
   document.addEventListener("mouseover", (e) => {
-    const callout = e.target.closest?.(".callout.callout--has-explanation");
-    if (!callout || callout.dataset.noHover || callout.dataset.animDir) return;
-    if (callout.classList.contains("is-revealed")) return;
+    const btn = e.target.closest?.(".callout-expand");
+    if (!btn) return;
+    const callout = btn.closest(".callout.callout--has-explanation");
+    if (!callout || callout.classList.contains("is-pinned")) return;
+    delete callout.dataset.hoverEnded;
     setRevealed(callout, true);
   });
 
   document.addEventListener("mouseout", (e) => {
-    const callout = e.target.closest?.(".callout.callout--has-explanation");
-    if (!callout || callout.contains(e.relatedTarget)) return;
-    delete callout.dataset.noHover;
-    if (callout.classList.contains("is-pinned")) return;
-    if (callout.dataset.animDir === "revealing") {
-      // Mouse left during reveal — let the animation finish, then hide.
+    const btn = e.target.closest?.(".callout-expand");
+    if (!btn || btn.contains(e.relatedTarget)) return;
+    const callout = btn.closest(".callout.callout--has-explanation");
+    if (!callout || callout.classList.contains("is-pinned")) return;
+    if (callout.dataset.animId) {
+      // Still animating — let it finish, then hide
       callout.dataset.hoverEnded = "1";
-      return;
+    } else {
+      setRevealed(callout, false);
     }
-    if (callout.dataset.animDir === "hiding") return;
-    if (callout.classList.contains("is-revealed")) setRevealed(callout, false);
   });
 
-  document.addEventListener("focusin", (e) => {
-    const callout = e.target.closest?.(".callout.callout--has-explanation");
-    if (!callout || callout.dataset.animDir) return;
-    if (!callout.classList.contains("is-revealed")) setRevealed(callout, true);
-  });
-
-  document.addEventListener("focusout", (e) => {
-    const callout = e.target.closest?.(".callout.callout--has-explanation");
-    if (!callout || callout.contains(e.relatedTarget)) return;
-    if (!callout.classList.contains("is-pinned") && !callout.dataset.animDir) {
-      if (callout.classList.contains("is-revealed")) setRevealed(callout, false);
-    }
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    document.querySelectorAll(".callout.callout--has-explanation.is-pinned").forEach((c) => {
+      c.classList.remove("is-pinned");
+      setRevealed(c, false);
+    });
   });
 }
 

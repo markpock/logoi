@@ -64,7 +64,7 @@
   }
 
   .article-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 22px;
     height: auto;
     min-height: 0;
