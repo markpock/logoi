@@ -6,6 +6,7 @@ tags:
     - philosophy
     - logic
 date: 2026-06-05
+draft: true
 ---
 Martin-Löf's celebrated distinction between judgment and proposition separates the act which confers force from the content which force is conferred on. The proposition $\textsf{``Barry is alive"}$ is a mere object, a dead heap of words which is stitched together by an admissible grammatical-syntactical (analogously -- logical-syntactical) form. The judgment $\textsf{``Barry is alive" true}$ is a (speech) act full of force and vitality -- it asserts something, it commits the speaker to something.
 
