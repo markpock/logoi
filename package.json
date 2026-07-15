@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.7",
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^4.16.18",
     "katex": "^0.16.11",
     "rehype-katex": "^7.0.1",

@@ -5,9 +5,12 @@ import rehypeKatex from "rehype-katex";
 import remarkCallouts from "./src/markdown/remarkCallouts.mjs";
 import { BASE_PATH, SITE_URL } from "./src/site.config.mjs";
 
+import sitemap from "@astrojs/sitemap";
+
 export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
+
   markdown: {
     syntaxHighlight: "shiki",
     shikiConfig: {
@@ -24,4 +27,6 @@ export default defineConfig({
     remarkPlugins: [remarkMath, remarkDirective, remarkCallouts],
     rehypePlugins: [rehypeKatex],
   },
+
+  integrations: [sitemap()],
 });
