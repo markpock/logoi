@@ -8,6 +8,10 @@ date: 2026-06-05
 
 ---
 
+I've spent a little while in Lean and Rocq now and have become a little too used to the formalistic fiat of inductive definitions. I was actually drafting up a blog post about how I wasn't sure about the division between proposition and judgment anymore (and there might be good reasons to doubt, but the reasons I had in mind were not so) when I came across [a paper by Jonathan Sterling](https://arxiv.org/pdf/1512.01837) describing the meaning explanations which flipped my mistaken prejudices on its head. In what follows, I will attempt to sketch out some of the ideas in the paper -- consider this an attempt to paraphrase.
+
+---
+
 Verificationism is, for most philosophers, a long-dead spectre, if occasionally a helpful mine for inspiration. In particular, verificationism about meaning goes something like this --
 > $\textsf{The verification principle.}$ The only meaningful statements are the statements which can be verified, and the meaning of a statement is its means of verification.
 
@@ -17,7 +21,6 @@ Now, here is a rather droll statement, familiar to anyone who has used Lean or R
 
 In general, the meaning of a proposition (type) depends on typed terms. As a tool for building proofs, this is all well and good. But taken as an explanation of meaning, as a formal gloss of the verification principle, this is deeply puzzling -- if we are trying to understand the meaning of types in general, why are we allowed to presuppose the notion of type?[^OriginalPaper]
 
-[^OriginalPaper]: See Jonathan Sterling's [paper](https://arxiv.org/pdf/1512.01837) for an unabbreviated presentation of the system to follow.
 
 ## The meaning explanations.
 
