@@ -2,7 +2,7 @@
 title: The meaning explanations.
 description: My notes on Jonathan Sterling's paper on the meaning explanations, by way of a general paraphrase of the ideas.
 tags:
-    - reading
+    - exposition
     - logic
 date: 2026-06-05
 
@@ -48,7 +48,7 @@ Hence, in the computational theory, whether a certain expression has a certain t
 
 Similarly, in the computational theory, whether two expressions are definitionally equal is an open question which we can only solve by reducing the expressions, whereas in the proof-oriented theory, we take a very dim view of definitional equality so as to make deciding definitional equality immediate from the structure of the expressions.[^IntensionalityExtensionality]
 
-[^IntensionalityExtensionality]: While it is not necessary for this to be the case, computational theories are often extensional -- that is, the judgmental equality of the theory is very strong. This usually happens because, as in the original Martin-Löf type theory, there is an explicit reflection rule that turns propositional equality into judgmental equality. However, in the variant presented by Sterling, this is because the judgmental equality reflects the semantic equality directly. Both methods make the judgmental equality undecidable -- but because the typing judgment is already undecidable apart from the undecidability of the judgmental equality, this does not matter. However, in proof-oriented systems, the typing judgment is meant to be decidable, our judgmental equality must also be decidable -- hence, we usually want our judgmental equality to be intensional, a weak structural equality that we can decide.
+[^IntensionalityExtensionality]: While it is not necessary for this to be the case, computational theories are often extensional -- that is, the judgmental equality of the theory is very strong. This usually happens because, as in the original Martin-Löf type theory, there is an explicit reflection rule that turns propositional equality into judgmental equality. However, in the variant presented by Sterling, this is because the judgmental equality reflects the semantic equality directly. Both methods make the judgmental equality undecidable -- but because the typing judgment is already undecidable apart from the undecidability of the judgmental equality, this does not matter. However, in proof-oriented systems, the typing judgment is meant to be decidable, so our judgmental equality must also be decidable -- hence, we usually want our judgmental equality to be intensional, a weak, structural equality.
 
 As a consequence, in the computational theory, that an expression has a certain type is something that one must prove in the metalogic, and one thus works in the metalogic rather than in the object logic -- one manipulates the judgments directly. In the proof-oriented theory, the metalogic is so simple that there is no need to manipulate the judgments directly -- the kernel will do it for the user, and the user is free to program in the object logic.
 
