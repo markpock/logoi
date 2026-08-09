@@ -1,12 +1,12 @@
 ---
 title: A gloss of linear logic.
-description: Baby (by which I mean me)'s first linear logic.
+description: The connectives and the core ideas.
 tags:
     - exposition
     - logic
 date: 2026-05-28
 ---
-After many years of skirting around the details and being vaguely aware of the generalities, I've finally buckled down and started learning a tiny bit about linear logic. Here's a first gloss of linear logic in a blog post, which may hopefully be helpful to people in a similar situation -- people who know how classical logic and basic set theory work and who know how to program. In particular, I've always wondered what par does, and I finally think I have a true (if deflationary) answer. Throughout the post, I’ll write = loosely for the relevant type/logical equivalence or isomorphism.
+After many years of skirting around the details and being vaguely aware of the generalities, I've finally buckled down and started learning a tiny bit about linear logic. Here's a first gloss of the core ideas in a blog post, which may hopefully be helpful to people in a similar situation -- people who know how classical logic and basic set theory work and who know how to program. In particular, I've always wondered what par does, and I finally think I have a true (if deflationary) answer. Throughout the post, I’ll write = loosely for the relevant type/logical equivalence or isomorphism.
 
 ---
 <!-- ## Introduction.
